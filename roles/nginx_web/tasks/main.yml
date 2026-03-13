@@ -1,0 +1,30 @@
+
+- name: Установить Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Создать папку сайта
+  file:
+    path: "{{ site_root }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+
+- name: Деплой динамической страницы
+  template:
+    src: index.html.j2
+    dest: "{{ site_root }}/index.html"
+    mode: '0644'
+
+- name: Настроить Nginx
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+  notify: Restart Nginx
+
+- name: Перезапустить UFW
+  ufw:
+    state: enabled

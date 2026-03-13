@@ -1,0 +1,14 @@
+- name: Установить HAProxy
+  apt:
+    name: haproxy
+    state: present
+
+- name: Настроить HAProxy (шаблон с hostvars!)
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: Restart HAProxy
+
+- name: Перезапустить UFW
+  ufw:
+    state: enabled

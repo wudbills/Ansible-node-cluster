@@ -1,0 +1,20 @@
+---
+- name: Настройка кластеров
+  hosts: all
+  become: true
+
+  roles:
+    - common
+
+- name: Настройка Web-серверов
+  hosts: webservers
+  roles:
+    - nginx_web
+  become: true
+
+- name: Настройка Load Balancer
+  hosts: loadbalancers
+  roles:
+    - haproxy
+  become: true
+

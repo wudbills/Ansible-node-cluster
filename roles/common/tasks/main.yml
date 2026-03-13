@@ -1,0 +1,23 @@
+
+- name: Обновление системы
+  ignore_errors: yes
+  apt:
+    update_cache: yes
+    upgrade: dist
+    cache_valid_time: 3600
+
+- name: Установить базовые пакеты + UFW
+  apt:
+    name:
+      - curl
+      - ufw
+    state: present
+
+- name: Разрешить SSH и открыть порты
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+  loop:
+    - 22
+    - 80
+  when: "'loadbalancers' in group_names or 'webservers' in group_names"

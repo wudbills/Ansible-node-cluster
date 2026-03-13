@@ -1,0 +1,10 @@
+[webservers]
+web1 ansible_host=192.168.1.112
+web2 ansible_host=192.168.1.113
+
+[loadbalancers]
+lb ansible_host=192.168.1.134
+
+[all:children]
+webservers
+loadbalancers

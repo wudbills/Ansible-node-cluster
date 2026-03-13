@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ru">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Web Server</title></head>
+<body style="font-family:Arial;text-align:center;background:#111;color:#0f0">
+  <h1>✅ Это Web Server: {{ inventory_hostname }}</h1>
+  <p>Развёрнуто через Ansible • IP: {{ ansible_default_ipv4.address }}</p>
+</body>
+</html>
